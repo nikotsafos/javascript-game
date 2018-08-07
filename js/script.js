@@ -1,12 +1,17 @@
-var game = new Phaser.Game(500, 500, Phaser.AUTO, 'game', {
+var player;
+var cursors;
+var bow;
+var PLAYER_SPEED = 500;
+var GAME_HEIGTH = 300;
+var GAME_WIDTH = 300;
+
+var game = new Phaser.Game(GAME_WIDTH, GAME_HEIGTH, Phaser.AUTO, 'game', {
   init: init,
   preload: preload,
   create: create,
   update: update
 });
-var player;
-var cursors;
-var PLAYER_SPEED = 200;
+
 
 function init() {
   return
@@ -18,11 +23,17 @@ function update() {
 function preload() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
-    game.load.image('background', '../assets/map.png');
-    // game.load.image('player', '../assets/swordguy.png');
+    game.load.tilemap('background', '../assets/map.json', null, Phaser.Tilemap.TILED_JSON);
 
-    game.load.spritesheet('swordguywalk', '../assets/swordguywalk.png', 64, 36);
-    game.load.spritesheet('enemy', "../assets/SkeletonWalk.png", 21.97, 33)
+    // game.load.image('background', '../assets/map.png');
+    game.load.image('bow', '../assets/bow.png');
+    game.load.image('apple', '../assets/apple.png');
+    game.load.image('boots', '../assets/boots.png');
+    game.load.image('cheese', '../assets/cheese.png');
+
+
+    game.load.spritesheet('swordguywalk', '../assets/swordguywalk.png', 64, 29);
+    game.load.spritesheet('enemy', "../assets/SkeletonWalk.png", 21.97, 33, 13);
 
 }
 
@@ -32,7 +43,7 @@ function create() {
 
     player = game.add.sprite(0, 0, 'swordguywalk');
     game.physics.arcade.enable(player);
-    player.body.collideWorldBounds = true;
+    // player.body.collideWorldBounds = true;
 
     player.animations.add('walk');
 
@@ -41,6 +52,24 @@ function create() {
     enemy.body.collideWorldBounds = true;
 
     enemy.animations.add('walk');
+
+    bow = game.add.sprite(100, 250, 'bow');
+    game.physics.arcade.enable(bow);
+    bow.body.collideWorldBounds = true;
+
+    apple = game.add.sprite(150, 100, 'apple');
+    game.physics.arcade.enable(apple);
+    apple.body.collideWorldBounds = true;
+
+    cheese = game.add.sprite(100, 350, 'cheese');
+    game.physics.arcade.enable(cheese);
+    cheese.body.collideWorldBounds = true;
+
+    boots = game.add.sprite(200, 250, 'boots');
+    game.physics.arcade.enable(boots);
+    boots.body.collideWorldBounds = true;
+
+    game.camera.follow(player);
 
     // player.animations.play('walk', 50, true);
 
@@ -94,8 +123,53 @@ function update() {
     walk();
     // swordguywalk.animations.play('walk', 30, true);
   }
+  if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+  //fire the Weapon
+  fireWeapon();
+}
+if (game.input.keyboard.isDown(Phaser.Keyboard.ENTER)){
+  switchWeapon();
+}
+  game.physics.arcade.overlap(player, enemy, hurtPlayer);
+  game.physics.arcade.overlap(player, bow, collectBow);
+  game.physics.arcade.overlap(player, apple, collectApple);
+  game.physics.arcade.overlap(player, boots, collectBoots);
+  game.physics.arcade.overlap(player, cheese, collectCheese);
+
 }
 
 function walk() {
   player.animations.play('walk', 30);
+}
+
+function hurtPlayer() {
+  player.kill();
+}
+
+function collectApple() {
+  player.kill();
+  apple.kill();
+  swal({
+  title: 'You ate the pioson apple!',
+  text: 'Thanks for playing!',
+  type: 'warning',
+  showCancelButtons: false,
+  confirmButtonText: 'Aw man',
+  closeOnConfirm: true
+});
+}
+
+function collectBow() {
+  bow.kill();
+  $("#items").append("<img src='../assets/bow.png'>");
+}
+
+function collectBoots() {
+  boots.kill();
+  $("#items").append("<img src='../assets/boots.png'>");
+}
+
+function collectCheese() {
+  cheese.kill();
+  $("#items").append("<img src='../assets/cheese.png'>");
 }
