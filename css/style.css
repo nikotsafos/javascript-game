@@ -1,3 +1,15 @@
 body {
   text-align: center;
+  /* background-color: black; */
+}
+
+#items {
+  background-color: white;
+  width: 10%;
+  height: 60px;
+  margin: 0 auto;
+}
+
+.swal {
+  background-color: rgba(255, 0, 0, 0.45);
 }
