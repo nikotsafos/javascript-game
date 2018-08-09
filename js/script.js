@@ -45,8 +45,8 @@ function preload() {
     game.load.image('key', '../assets/key.png');
 
 
-    game.load.spritesheet('swordguywalk', '../assets/swordguywalk.png', 64, 29);
-    game.load.spritesheet('enemy', "../assets/SkeletonWalk.png", 21.97, 33, 13);
+    game.load.spritesheet('swordguywalk', '../assets/adventurer-run3-sword-Sheet.png', 50, 37);
+    game.load.spritesheet('enemy', "../assets/SkeletonWalk.png", 22, 33, 13);
     // game.load.spritesheet('dead', "../assets/dead.png", 64, 29, 12);
     // game.load.spritesheet('attack', '../assets/attack.png', 24, 23, 4);
 
@@ -65,17 +65,17 @@ function create() {
     wallLayer = map.createLayer('walls');
     map.setCollisionBetween(0, 52, true, wallLayer);
 
-    // backgroundLayer.resizeWorld();
+    backgroundLayer.resizeWorld();
 
 
-    game.world.setBounds(0, 50, 5120, 5120);
+    // game.world.setBounds(0, 50, 5120, 5120);
 
-    pageAlignHorizontally = true;
-    pageAlignVertically = true;
 
     player = game.add.sprite(game.world.centerX, game.world.centerY, 'swordguywalk');
     game.physics.arcade.enable(player);
     player.body.collideWorldBounds = true;
+
+    player.anchor.setTo(.5,.5);
 
     player.animations.add('swordguywalk');
     // player.animations.add('attack');
@@ -84,6 +84,8 @@ function create() {
     enemy = game.add.sprite(Math.floor(Math.random() * 1920), Math.floor(Math.random() * 1920), 'enemy');
     game.physics.arcade.enable(enemy);
     enemy.body.collideWorldBounds = true;
+
+    enemy.anchor.setTo(.5,.5);
 
     enemy.animations.add('enemy');
 
@@ -155,7 +157,9 @@ function update() {
     enemy.body.velocity.x = PLAYER_SPEED;
     skeletonWalk();
     walk();
-    // swordguywalk.animations.play('walk', 30, true);
+    player.scale.x = -1;
+    enemy.scale.x = 1;
+
 
   }
   else if (cursors.right.isDown || game.input.keyboard.isDown(Phaser.Keyboard.D)) {
@@ -164,6 +168,8 @@ function update() {
     enemy.body.velocity.x = -PLAYER_SPEED;
     skeletonWalk();
     walk();
+    player.scale.x = 1;
+    enemy.scale.x = -1;
     // swordguywalk.animations.play('walk', 30, true);
   }
 
@@ -199,6 +205,7 @@ function update() {
   game.physics.arcade.overlap(player, potion, collectPotion);
   game.physics.arcade.overlap(player, ring, collectRing);
   game.physics.arcade.collide(player, wallLayer);
+  game.physics.arcade.collide(enemy, wallLayer);
 
 
 }
