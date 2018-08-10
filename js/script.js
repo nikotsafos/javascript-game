@@ -107,7 +107,7 @@ function create() {
     bow = game.add.sprite(2608, 2640, 'bow');
     game.physics.arcade.enable(bow);
 
-    apple = game.add.sprite(0, 0), 'apple');
+    apple = game.add.sprite(0, 0, 'apple');
     game.physics.arcade.enable(apple);
 
     cheese = game.add.sprite((180 * 16), (165 * 16), 'cheese');
