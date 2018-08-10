@@ -35,25 +35,25 @@ function preload() {
     game.load.image('gameTiles', 'assets/0x72_16x16DungeonTileset_walls.v1.png');
 
 
-    game.load.image('bow', '../assets/bow.png');
-    game.load.image('apple', '../assets/apple.png');
-    game.load.image('boots', '../assets/boots.png');
-    game.load.image('cheese', '../assets/cheese.png');
-    game.load.image('cup', '../assets/cup.png');
-    game.load.image('gloves', '../assets/gloves.png');
-    game.load.image('necklace', '../assets/necklace.png');
-    game.load.image('potion', '../assets/potion.png');
-    game.load.image('ring', '../assets/ring.png');
-    game.load.image('key', '../assets/key.png');
+    game.load.image('bow', './assets/bow.png');
+    game.load.image('apple', './assets/apple.png');
+    game.load.image('boots', './assets/boots.png');
+    game.load.image('cheese', './assets/cheese.png');
+    game.load.image('cup', './assets/cup.png');
+    game.load.image('gloves', './assets/gloves.png');
+    game.load.image('necklace', './assets/necklace.png');
+    game.load.image('potion', './assets/potion.png');
+    game.load.image('ring', './assets/ring.png');
+    game.load.image('key', './assets/key.png');
 
 
-    game.load.spritesheet('swordguywalk', '../assets/adventurer-run3-sword-Sheet.png', 50, 37);
-    game.load.spritesheet('enemy', "../assets/SkeletonWalk.png", 22, 33, 13);
+    game.load.spritesheet('swordguywalk', './assets/adventurer-run3-sword-Sheet.png', 50, 37);
+    game.load.spritesheet('enemy', "./assets/SkeletonWalk.png", 22, 33, 13);
     // game.load.spritesheet('dead', "../assets/dead.png", 64, 29, 12);
-    game.load.spritesheet('attack', '../assets/attack2.png', 43, 32);
+    game.load.spritesheet('attack', './assets/attack2.png', 43, 32);
 
-    game.load.audio('music', '../assets/song.mp3');
-    game.load.audio('steps', '../assets/steps.mp3');
+    game.load.audio('music', './assets/song.mp3');
+    game.load.audio('steps', './assets/steps.mp3');
 
 }
 
