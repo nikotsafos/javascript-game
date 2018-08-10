@@ -1,13 +1,26 @@
 body {
   text-align: center;
-  /* background-color: black; */
+  background-color: black;
+}
+
+canvas {
+  display : block;
+  margin : auto;
 }
 
 #items {
   background-color: white;
-  width: 10%;
+  width: 20%;
   height: 60px;
-  margin: 0 auto;
+  margin: 10px auto;
+}
+
+#gamelog {
+  background-color: white;
+  width: 33%;
+  height: 100px;
+  margin: 10px auto;
+  color: black;
 }
 
 .swal {

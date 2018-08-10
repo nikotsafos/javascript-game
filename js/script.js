@@ -1,15 +1,17 @@
 var player;
 var cursors;
 var bow;
-var enemy;
+var enemies;
 var level1;
 var mapTiles;
 var backgroundLayer;
 var wallLayer
 var map;
+var score;
+var stuff = 0;
 var PLAYER_SPEED = 250;
-var GAME_HEIGTH = 500;
-var GAME_WIDTH = 500;
+var GAME_HEIGTH = 480;
+var GAME_WIDTH = 480;
 var PLAYER_HEALTH = 50;
 
 var game = new Phaser.Game(GAME_WIDTH, GAME_HEIGTH, Phaser.AUTO, 'game', {
@@ -48,15 +50,19 @@ function preload() {
     game.load.spritesheet('swordguywalk', '../assets/adventurer-run3-sword-Sheet.png', 50, 37);
     game.load.spritesheet('enemy', "../assets/SkeletonWalk.png", 22, 33, 13);
     // game.load.spritesheet('dead', "../assets/dead.png", 64, 29, 12);
-    // game.load.spritesheet('attack', '../assets/attack.png', 24, 23, 4);
+    game.load.spritesheet('attack', '../assets/attack2.png', 43, 32);
+
+    game.load.audio('music', '../assets/song.mp3');
+    game.load.audio('steps', '../assets/steps.mp3');
 
 }
 
 function create() {
 
     // var background = game.add.tileSprite(0, 50, 5120, 5120, 'background');
-    // debugger;
-
+    music = game.add.audio('music');
+    steps = game.add.audio('steps', 0.33);
+    music.play();
 
     map = game.add.tilemap('level1');
     map.addTilesetImage('walls', 'gameTiles');
@@ -65,7 +71,7 @@ function create() {
     wallLayer = map.createLayer('walls');
     map.setCollisionBetween(0, 52, true, wallLayer);
 
-    backgroundLayer.resizeWorld();
+    // backgroundLayer.resizeWorld();
 
 
     // game.world.setBounds(0, 50, 5120, 5120);
@@ -81,7 +87,15 @@ function create() {
     // player.animations.add('attack');
     // player.animations.add('dead');
 
-    enemy = game.add.sprite(Math.floor(Math.random() * 1920), Math.floor(Math.random() * 1920), 'enemy');
+    // enemies = game.add.group();
+    // enemies.enableBody = true;
+    // enemies.physicsBodyType = Phaser.Physics.ARCADE;
+    // enemies.createMultiple(50, 'enemy');
+    // enemies.setAll('collideWorldBounds', true);
+    //
+    // enemies.callAll('animations.add', 'animations', 'enemy');
+
+    enemy = game.add.sprite(game.world.centerX + 100, game.world.centerY + 100, 'enemy');
     game.physics.arcade.enable(enemy);
     enemy.body.collideWorldBounds = true;
 
@@ -89,45 +103,36 @@ function create() {
 
     enemy.animations.add('enemy');
 
-    bow = game.add.sprite(Math.floor(Math.random() * 1920), Math.floor(Math.random() * 1920), 'bow');
+
+    bow = game.add.sprite(2608, 2640, 'bow');
     game.physics.arcade.enable(bow);
-    bow.body.collideWorldBounds = true;
 
-    apple = game.add.sprite(Math.floor(Math.random() * 1920), Math.floor(Math.random() * 1920), 'apple');
+    apple = game.add.sprite(0, 0), 'apple');
     game.physics.arcade.enable(apple);
-    apple.body.collideWorldBounds = true;
 
-    cheese = game.add.sprite(Math.floor(Math.random() * 1920), Math.floor(Math.random() * 1920), 'cheese');
+    cheese = game.add.sprite((180 * 16), (165 * 16), 'cheese');
     game.physics.arcade.enable(cheese);
-    cheese.body.collideWorldBounds = true;
 
     boots = game.add.sprite(Math.floor(Math.random() * 1920), Math.floor(Math.random() * 1920), 'boots');
     game.physics.arcade.enable(boots);
-    boots.body.collideWorldBounds = true;
 
-    cup = game.add.sprite(Math.floor(Math.random() * 1920), Math.floor(Math.random() * 1920), 'cup');
+    cup = game.add.sprite((136 * 16), (135 * 16), 'cup');
     game.physics.arcade.enable(cup);
-    cup.body.collideWorldBounds = true;
 
     gloves = game.add.sprite(Math.floor(Math.random() * 1920), Math.floor(Math.random() * 1920), 'gloves');
     game.physics.arcade.enable(gloves);
-    gloves.body.collideWorldBounds = true;
 
     key = game.add.sprite(Math.floor(Math.random() * 1920), Math.floor(Math.random() * 1920), 'key');
     game.physics.arcade.enable(key);
-    key.body.collideWorldBounds = true;
 
     necklace = game.add.sprite(Math.floor(Math.random() * 1920), Math.floor(Math.random() * 1920), 'necklace');
     game.physics.arcade.enable(necklace);
-    necklace.body.collideWorldBounds = true;
 
     potion = game.add.sprite(Math.floor(Math.random() * 1920), Math.floor(Math.random() * 1920), 'potion');
     game.physics.arcade.enable(potion);
-    potion.body.collideWorldBounds = true;
 
     ring = game.add.sprite(Math.floor(Math.random() * 1920), Math.floor(Math.random() * 1920), 'ring');
     game.physics.arcade.enable(ring);
-    ring.body.collideWorldBounds = true;
 
 
     game.camera.follow(player, Phaser.Camera.FOLLOW_TOPDOWN);
@@ -139,6 +144,8 @@ function create() {
 
     // var walk = swordguywalk.animations.add('swordguywalk');
 
+    // game.time.events.loop(Phaser.Timer.SECOND * 2, spawnEnemy);
+
 
     cursors = game.input.keyboard.createCursorKeys(); //arrow keys
     game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR, Phaser.Keyboard.ENTER, Phaser.Keyboard.A, Phaser.Keyboard.S, Phaser.Keyboard.D, Phaser.Keyboard.W]);
@@ -148,6 +155,9 @@ function create() {
 function update() {
   player.body.velocity.set(0);
   enemy.body.velocity.set(0);
+  if (music.isPlaying === false) {
+    music.play();
+  }
 
   // player.animations.paused = true;
 
@@ -190,7 +200,7 @@ function update() {
     // swordguywalk.animations.play('walk', 30, true);
   }
   if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-    player.animations.play('attack', 30);
+    // player.animations.play('attack', 30);
 }
 
   game.physics.arcade.overlap(player, enemy, hurtPlayer);
@@ -211,20 +221,26 @@ function update() {
 }
 
 function walk() {
-  player.animations.play('swordguywalk', 30);
+  player.animations.play('swordguywalk', 15);
+  if (steps.isPlaying === false) {
+    steps.play();
+  }
 }
 
 function skeletonWalk() {
-  enemy.animations.play('enemy', 30);
+  enemy.animations.play('enemy');
+  // enemies.callAll('play', null, 'enemies');
 }
 
 function hurtPlayer() {
   if (PLAYER_HEALTH > 0) {
     PLAYER_HEALTH = PLAYER_HEALTH - 25;
+    $('#gamelog').prepend('OUCH!</br>');
     console.log(PLAYER_HEALTH);
   } else {
     console.log(PLAYER_HEALTH);
     playerKill();
+    $('#gamelog').prepend('You DIED</br>');
   }
 
 }
@@ -233,6 +249,8 @@ function collectApple() {
   // player.animations.play('dead');
   playerKill();
   apple.kill();
+  $('#gamelog').prepend('You ate the poison Apple</br>');
+  $('#gamelog').prepend('You DIED</br>');
   swal({
   title: 'You ate the poison apple!',
   text: 'Thanks for playing!',
@@ -248,17 +266,39 @@ function collectApple() {
 function collectBow() {
   bow.kill();
   $("#items").append("<img src='../assets/bow.png'>");
+  $('#gamelog').prepend('Picked up a Bow</br>');
+  score += 1;
+  if (score === 9) {
+    $('#gamelog').prepend('YOU FOUND ALL THE ITEMS! YOU WIN!</br>');
+    game.physics.arcade.disable(player);
+    game.physics.arcade.disable(spawnEnemy);
+  }
 }
 
 function collectBoots() {
   boots.kill();
   PLAYER_SPEED = PLAYER_SPEED * 1.25;
   $("#items").append("<img src='../assets/boots.png'>");
+  $('#gamelog').prepend('Picked up Boots. Speed increased 25%</br>');
+  score += 1;
+  if (score === 9) {
+    $('#gamelog').prepend('YOU FOUND ALL THE ITEMS! YOU WIN!</br>');
+    game.physics.arcade.disable(player);
+    game.physics.arcade.disable(spawnEnemy);
+  }
 }
 
 function collectCheese() {
   cheese.kill();
   PLAYER_HEALTH = PLAYER_HEALTH + 25;
+  $("#items").append("<img src='../assets/cheese.png'>");
+  $('#gamelog').prepend('Picked up some cheese. Health +25</br>');
+  score += 1;
+  if (score === 9) {
+    $('#gamelog').prepend('YOU FOUND ALL THE ITEMS! YOU WIN!</br>');
+    game.physics.arcade.disable(player);
+    game.physics.arcade.disable(spawnEnemy);
+  }
 //   swal({
 //   title: 'You ate some cheese!',
 //   text: '+25hp',
@@ -273,31 +313,73 @@ function collectCheese() {
 function collectCup() {
   cup.kill();
   $("#items").append("<img src='../assets/cup.png'>");
+  $('#gamelog').prepend('Picked up a Cup</br>');
+  score += 1;
+  if (score === 9) {
+    $('#gamelog').prepend('YOU FOUND ALL THE ITEMS! YOU WIN!</br>');
+    game.physics.arcade.disable(player);
+    game.physics.arcade.disable(spawnEnemy);
+  }
 }
 
 function collectGloves() {
   gloves.kill();
   $("#items").append("<img src='../assets/gloves.png'>");
+  $('#gamelog').prepend('Picked up some Gloves</br>');
+  score += 1;
+  if (score === 9) {
+    $('#gamelog').prepend('YOU FOUND ALL THE ITEMS! YOU WIN!</br>');
+    game.physics.arcade.disable(player);
+    game.physics.arcade.disable(spawnEnemy);
+  }
 }
 
 function collectKey() {
   key.kill();
   $("#items").append("<img src='../assets/key.png'>");
+  $('#gamelog').prepend('Picked up a Key</br>');
+  score += 1;
+  if (score === 9) {
+    $('#gamelog').prepend('YOU FOUND ALL THE ITEMS! YOU WIN!</br>');
+    game.physics.arcade.disable(player);
+    game.physics.arcade.disable(spawnEnemy);
+  }
 }
 
 function collectNecklace() {
   necklace.kill();
   $("#items").append("<img src='../assets/necklace.png'>");
+  $('#gamelog').prepend('Picked up a Necklace</br>');
+  score += 1;
+  if (score === 9) {
+    $('#gamelog').prepend('YOU FOUND ALL THE ITEMS! YOU WIN!</br>');
+    game.physics.arcade.disable(player);
+    game.physics.arcade.disable(spawnEnemy);
+  }
 }
 
 function collectPotion() {
   potion.kill();
   $("#items").append("<img src='../assets/potion.png'>");
+  $('#gamelog').prepend('Picked up a Potion</br>');
+  score += 1;
+  if (score === 9) {
+    $('#gamelog').prepend('YOU FOUND ALL THE ITEMS! YOU WIN!</br>');
+    game.physics.arcade.disable(player);
+    game.physics.arcade.disable(spawnEnemy);
+  }
 }
 
 function collectRing() {
   ring.kill();
   $("#items").append("<img src='../assets/ring.png'>");
+  $('#gamelog').prepend('Picked up a Ring</br>');
+  score += 1;
+  if (score === 9) {
+    $('#gamelog').prepend('YOU FOUND ALL THE ITEMS! YOU WIN!</br>');
+    game.physics.arcade.disable(player);
+    game.physics.arcade.disable(spawnEnemy);
+  }
 }
 
 function playerKill() {
@@ -305,3 +387,8 @@ function playerKill() {
   player.kill();
   // location.reload();
 }
+
+// function spawnEnemy() {
+//   var enemy = enemies.getFirstExists(false);
+//   enemy.reset(Math.floor(Math.random() * 4800), Math.floor(Math.random() * 4800));
+// }
