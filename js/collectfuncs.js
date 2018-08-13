@@ -27,6 +27,7 @@ function collectCheese() {
   cheese.kill();
   pickip.play();
   $("#items").append("<img src='./assets/cheese.png'>");
+  $('#gamelog').prepend('Picked up some Cheese</br>');
   // add to stuff
   stuff += 1;
   checkWin();
