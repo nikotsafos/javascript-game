@@ -17,7 +17,6 @@ function preload() {
     // load map and tiles
     game.load.tilemap('level1', 'assets/testmap.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.image('gameTiles', 'assets/0x72_16x16DungeonTileset_walls.v1.png');
-<<<<<<< HEAD
 
 
     game.load.image('bow', './assets/bow.png');
@@ -39,7 +38,7 @@ function preload() {
 
     game.load.audio('music', './assets/song.mp3');
     game.load.audio('steps', './assets/steps.mp3');
-=======
+
     // load items
     game.load.image('bow', './assets/bow.png');
     game.load.image('apple', './assets/apple.png');
@@ -58,7 +57,7 @@ function preload() {
     game.load.audio('music', './assets/song.mp3');
     game.load.audio('steps', './assets/steps.mp3');
     game.load.audio('pickup', './assets/pickup.mp3');
->>>>>>> master
+
 
 }
 
@@ -105,11 +104,9 @@ function create() {
     bow = game.add.sprite(2608, 2640, 'bow');
     game.physics.arcade.enable(bow);
 
-<<<<<<< HEAD
-    apple = game.add.sprite(0, 0, 'apple');
-=======
+
     apple = game.add.sprite((260 * 16), (35 * 16), 'apple');
->>>>>>> master
+
     game.physics.arcade.enable(apple);
 
     cheese = game.add.sprite((180 * 16), (165 * 16), 'cheese');
