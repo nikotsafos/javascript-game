@@ -41,23 +41,23 @@ function preload() {
     game.load.audio('steps', './assets/steps.mp3');
 =======
     // load items
-    game.load.image('bow', '../assets/bow.png');
-    game.load.image('apple', '../assets/apple.png');
-    game.load.image('boots', '../assets/boots.png');
-    game.load.image('cheese', '../assets/cheese.png');
-    game.load.image('cup', '../assets/cup.png');
-    game.load.image('gloves', '../assets/gloves.png');
-    game.load.image('necklace', '../assets/necklace.png');
-    game.load.image('potion', '../assets/potion.png');
-    game.load.image('ring', '../assets/ring.png');
-    game.load.image('key', '../assets/key.png');
+    game.load.image('bow', './assets/bow.png');
+    game.load.image('apple', './assets/apple.png');
+    game.load.image('boots', './assets/boots.png');
+    game.load.image('cheese', './assets/cheese.png');
+    game.load.image('cup', './assets/cup.png');
+    game.load.image('gloves', './assets/gloves.png');
+    game.load.image('necklace', './assets/necklace.png');
+    game.load.image('potion', './assets/potion.png');
+    game.load.image('ring', './assets/ring.png');
+    game.load.image('key', './assets/key.png');
     // load spritesheets that will be animated
-    game.load.spritesheet('swordguywalk', '../assets/adventurer-run3-sword-Sheet.png', 50, 37);
-    game.load.spritesheet('fire', '../assets/flames.png', 16, 24, 12);
+    game.load.spritesheet('swordguywalk', './assets/adventurer-run3-sword-Sheet.png', 50, 37);
+    game.load.spritesheet('fire', './assets/flames.png', 16, 24, 12);
     // load sounds
-    game.load.audio('music', '../assets/song.mp3');
-    game.load.audio('steps', '../assets/steps.mp3');
-    game.load.audio('pickup', '../assets/pickup.mp3');
+    game.load.audio('music', './assets/song.mp3');
+    game.load.audio('steps', './assets/steps.mp3');
+    game.load.audio('pickup', './assets/pickup.mp3');
 >>>>>>> master
 
 }
