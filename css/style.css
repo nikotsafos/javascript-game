@@ -3,26 +3,17 @@ body {
   background-color: black;
 }
 
-canvas {
-  display : block;
-  margin : auto;
+#container {
+  display: flex;
+  justify-content: center;
 }
 
 #items {
-  background-color: white;
+  color: white;
   width: 20%;
-  height: 60px;
-  margin: 10px auto;
 }
 
 #gamelog {
-  background-color: white;
-  width: 33%;
-  height: 100px;
-  margin: 10px auto;
-  color: black;
-}
-
-.swal {
-  background-color: rgba(255, 0, 0, 0.45);
+  color: white;
+  width: 20%;
 }
