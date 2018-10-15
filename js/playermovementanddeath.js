@@ -9,7 +9,7 @@ function walk() {
 
 function killPlayer() {
     // adds you died to the gamelog, and displays a sweetalert
-    $('#gamelog').prepend('You DIED</br>');
+    $('#gamelog').append('You DIED</br>');
     swal({
     title: 'You DIED!',
     text: 'Thanks for playing!',
@@ -29,7 +29,7 @@ function killPlayer() {
 function collectApple() {
   // removes apple from the screen
   apple.kill();
-  $('#gamelog').prepend('You ate the poison Apple</br>');
+  $('#gamelog').append('You ate the poison Apple</br>');
   // kills player. poison apple
   killPlayer();
 }
@@ -38,7 +38,7 @@ function checkWin() {
   // checks if all 9 items have been picked up
   if (stuff === 9) {
     // updates gamelog
-    $('#gamelog').prepend('YOU FOUND ALL THE ITEMS! YOU WIN!</br>');
+    $('#gamelog').append('YOU FOUND ALL THE ITEMS! YOU WIN!</br>');
     // stops player movement and animation. stops flames animation
     player.body.moves = false;
     player.animations.destroy();

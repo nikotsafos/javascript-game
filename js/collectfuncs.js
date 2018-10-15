@@ -3,7 +3,7 @@ function collectBow() {
   bow.kill();
   pickip.play();
   $("#items").append("<img src='./assets/bow.png'>");
-  $('#gamelog').prepend('Picked up a Bow</br>');
+  $('#gamelog').append('Picked up a Bow</br>');
   // adds to stuff
   stuff += 1;
   checkWin();
@@ -16,7 +16,7 @@ function collectBoots() {
   // boots also increase speed
   PLAYER_SPEED = PLAYER_SPEED * 1.25;
   $("#items").append("<img src='./assets/boots.png'>");
-  $('#gamelog').prepend('Picked up Boots. Speed increased 25%</br>');
+  $('#gamelog').append('Picked up Boots. Speed increased 25%</br>');
   // add to stuff
   stuff += 1;
   checkWin();
@@ -27,7 +27,7 @@ function collectCheese() {
   cheese.kill();
   pickip.play();
   $("#items").append("<img src='./assets/cheese.png'>");
-  $('#gamelog').prepend('Picked up some Cheese</br>');
+  $('#gamelog').append('Picked up some Cheese</br>');
   // add to stuff
   stuff += 1;
   checkWin();
@@ -38,7 +38,7 @@ function collectCup() {
   cup.kill();
   pickip.play();
   $("#items").append("<img src='./assets/cup.png'>");
-  $('#gamelog').prepend('Picked up a Cup</br>');
+  $('#gamelog').append('Picked up a Cup</br>');
   // add to stuff
   stuff += 1;
   checkWin();
@@ -49,7 +49,7 @@ function collectGloves() {
   gloves.kill();
   pickip.play();
   $("#items").append("<img src='./assets/gloves.png'>");
-  $('#gamelog').prepend('Picked up some Gloves</br>');
+  $('#gamelog').append('Picked up some Gloves</br>');
   // adds to stuff
   stuff += 1;
   checkWin();
@@ -60,7 +60,7 @@ function collectKey() {
   key.kill();
   pickip.play();
   $("#items").append("<img src='./assets/key.png'>");
-  $('#gamelog').prepend('Picked up a Key</br>');
+  $('#gamelog').append('Picked up a Key</br>');
   // adds to stuff
   stuff += 1;
   checkWin();
@@ -71,7 +71,7 @@ function collectNecklace() {
   necklace.kill();
   pickip.play();
   $("#items").append("<img src='./assets/necklace.png'>");
-  $('#gamelog').prepend('Picked up a Necklace</br>');
+  $('#gamelog').append('Picked up a Necklace</br>');
   // adds to stuff
   stuff += 1;
   checkWin();
@@ -82,7 +82,7 @@ function collectPotion() {
   potion.kill();
   pickip.play();
   $("#items").append("<img src='./assets/potion.png'>");
-  $('#gamelog').prepend('Picked up a Potion</br>');
+  $('#gamelog').append('Picked up a Potion</br>');
   // adds to stuff
   stuff += 1;
   checkWin();
@@ -93,7 +93,7 @@ function collectRing() {
   ring.kill();
   pickip.play();
   $("#items").append("<img src='./assets/ring.png'>");
-  $('#gamelog').prepend('Picked up a Ring</br>');
+  $('#gamelog').append('Picked up a Ring</br>');
   // adds to stuff
   stuff += 1;
   checkWin();
