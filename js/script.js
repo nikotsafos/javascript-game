@@ -81,31 +81,31 @@ function create() {
     bow = game.add.sprite(2608, 2640, 'bow');
     game.physics.arcade.enable(bow);
 
-    apple = game.add.sprite((260 * 16), (35 * 16), 'apple');
+    apple = game.add.sprite(4160, 560, 'apple');
     game.physics.arcade.enable(apple);
 
-    cheese = game.add.sprite((180 * 16), (165 * 16), 'cheese');
+    cheese = game.add.sprite(2880, 2640, 'cheese');
     game.physics.arcade.enable(cheese);
 
-    boots = game.add.sprite((269 * 16), (123 * 16), 'boots');
+    boots = game.add.sprite(4304, 1968, 'boots');
     game.physics.arcade.enable(boots);
 
-    cup = game.add.sprite((136 * 16), (135 * 16), 'cup');
+    cup = game.add.sprite(2176, 2160, 'cup');
     game.physics.arcade.enable(cup);
 
-    gloves = game.add.sprite((225 * 16), (287 * 16), 'gloves');
+    gloves = game.add.sprite(3600, 4592, 'gloves');
     game.physics.arcade.enable(gloves);
 
-    key = game.add.sprite((14 * 16), (123 * 16), 'key');
+    key = game.add.sprite(224, 1968, 'key');
     game.physics.arcade.enable(key);
 
-    necklace = game.add.sprite((9 * 16), (224 * 16), 'necklace');
+    necklace = game.add.sprite(144, 3584, 'necklace');
     game.physics.arcade.enable(necklace);
 
-    potion = game.add.sprite((94 * 16), (156 * 16), 'potion');
+    potion = game.add.sprite(1504, 2496, 'potion');
     game.physics.arcade.enable(potion);
 
-    ring = game.add.sprite((23 * 16), (57 * 16), 'ring');
+    ring = game.add.sprite(368, 912, 'ring');
     game.physics.arcade.enable(ring);
     // make more flames appear every 30 seconds
     game.time.events.loop(Phaser.Timer.SECOND * 30, makeFlames);
